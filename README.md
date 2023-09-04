@@ -21,20 +21,8 @@ your path:
 ```
 addpath(userpath+"\RMOAS-RDCBF")
 ```
-The example file `rdcbf_example.mlx` is a MATLAB Live Script that will guide you in using the
-package and solves the Example 1 of our paper.
-
-### Example
-For a quick-start, inspect the file `matlab/vcp_bk/vcp_bk_example.m` and run it.
-You should see the following plots.
-
-<p align="center">
-  <img src="https://github.com/ARC-Lab-Research-Group/FlatVCP/blob/master/img/bk_matlab_example_path.png" width="500" alt="Bicycle MATLAB Example Path">
-</p>
-<p float="center">
-  <img src="https://github.com/ARC-Lab-Research-Group/FlatVCP/blob/master/img/bk_matlab_example_state.png" width="400" alt="Bicycle MATLAB Example State">
-  <img src="https://github.com/ARC-Lab-Research-Group/FlatVCP/blob/master/img/bk_matlab_example_input.png" width="400" alt="Bicycle MATLAB Example Input">
-</p>
+We included two example files `rdcbf_example1.mlx` and `rdcbf_example2.mlx` as MATLAB Live Scripts that will guide you in using the
+package. They solve Examples 1 and 2, respectively of our paper.
 
 ## Acknowledgements
 This work was supported by the University of Colorado Boulder.
