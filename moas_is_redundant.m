@@ -3,7 +3,7 @@ function redundant = moas_is_redundant(f,g,A,b)
 %  redundant = MOAS_IS_REDUNDANT(f,g,A,b) Returns true if the constraint is
 %              redundant, false otherwise.
 %
-%   Copyright (c) 2023, University of Colorado Boulder
+%   Copyright (c) 2024, University of Colorado Boulder
 
 redundant = true;
 [~,fval,flag] = linprog(-f,A,b,[],[],[],[],optimoptions('linprog','Display','none'));

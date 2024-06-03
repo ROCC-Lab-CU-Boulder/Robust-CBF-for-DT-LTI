@@ -3,7 +3,7 @@ function [G_x, G_u] = moas_ss_basis(A,B,C,D)
 %  given the tracking outputs y = Cx + Du. The basis is G = [G_x;G_u].
 %  [G_x, G_u] = MOAS_SS_BASIS(A,B,C,D) Returns the ss manifold basis.
 %
-%   Copyright (c) 2023, University of Colorado Boulder
+%   Copyright (c) 2024, University of Colorado Boulder
 
 G_bar = null([A-eye(size(A)) B]);
 G_x_bar = G_bar(1:size(A,2),:);

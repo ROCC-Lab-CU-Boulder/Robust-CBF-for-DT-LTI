@@ -5,7 +5,7 @@ function rdcbf = rdcbf_compile(data,options)
 %  rdcbf = RDCBF_COMPILE(x,r,data,options) if options.soft=1, 
 %      the RDCBF-condition is made soft.
 %
-%   Copyright (c) 2023, University of Colorado Boulder
+%   Copyright (c) 2024, University of Colorado Boulder
 
 arguments
   data
@@ -15,10 +15,11 @@ end
 % Setup optimization variables and parameters
 x = sdpvar(size(data.A,1),1);
 u = sdpvar(size(data.B,2),1);
+rho = sdpvar(size(data.B,2),1);
 r = sdpvar(size(data.G_x,2),1);
 
 % Objective
-obj = norm(u - data.kappa(x,r))^2;
+obj = norm(u - data.kappa(x,r))^2 + data.eta*norm(rho - r)^2;
 
 if options.soft
   wt = 1000; % wt on epsilon (sufficiently large)
@@ -30,10 +31,10 @@ end
 cst = [];
 cst = [cst, data.M*u <= data.b];
 if options.soft
-  cst = [cst, data.H_rpoinf*(data.A*x + data.B*u) <= data.c_rpoinf - data.dc_star + epsilon];
+  cst = [cst, data.M_K*[u;rho] <= data.b_K(x) + epsilon];
   cst = [cst, epsilon >= 0];
 else
-  cst = [cst, data.H_rpoinf*(data.A*x + data.B*u) <= data.c_rpoinf - data.dc_star];
+  cst = [cst, data.M_K*[u;rho] <= data.b_K(x)]; 
 end
 
 % Options

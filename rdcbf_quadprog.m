@@ -6,13 +6,13 @@ function [H, f, A, b] = rdcbf_quadprog(data)
 %  Note that f is an anonymous function of the state x and reference r 
 %  and that b is an anonymous function of the state x.
 %  
-%   Copyright (c) 2023, University of Colorado Boulder
+%   Copyright (c) 2024, University of Colorado Boulder
 
 arguments
   data
 end
 
-H = 2*eye(size(data.B,2));
-f = @(x,r) -2*data.kappa(x,r);
-A = [data.H_rpoinf*data.B; data.M];
-b = @(x) [data.c_rpoinf - data.H_rpoinf*data.A*x - data.dc_star; data.b];
+H = 2*eye(2*size(data.B,2));
+f = @(x,r) -2*[data.kappa(x,r); data.eta*r];
+A = [[data.M, zeros(size(data.M,1),data.m)]; data.M_K];
+b = @(x) [data.b; data.b_K(x)];

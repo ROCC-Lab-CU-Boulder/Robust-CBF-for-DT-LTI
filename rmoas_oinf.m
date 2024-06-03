@@ -1,44 +1,54 @@
-function [H_roinf, c_roinf] = rmoas_oinf(data, K)
+function [H, c, phi] = rmoas_oinf(data, K)
 %RMOAS_OINF Computes the robust maximal output admissible under K: 
-%  O_inf^epsilon.
-%  [H_roinf,c_roinf] = RMOAS_OINF(data, K) Returns [H_oinf, c_oinf]
-%          such that O_inf^epsilon = {(x,v) | H_roinf[x;v] <= c_roinf}
+%  O_inf^c.
+%  [H, c, phi] = RMOAS_OINF(data, K) Returns [H, c]
+%          such that O_inf^c = {(x,v) | H[x;v] <= c} and
+%          the vector of worst-case perturbations phi.
 %
-%   Copyright (c) 2023, University of Colorado Boulder
-
+%   Copyright (c) 2024, University of Colorado Boulder
 
 % Get dimensions
-m = size(data.B,2);
-l = size(data.G_x,2);
 n = size(data.A,1);
-n_c = length(data.a);
+m = size(data.B,2);
+dimz = length(data.z);
+dimb = length(data.b);
 
 % Closed Loop System
-A_cl = data.A - data.B*K;
-B_cl = data.B*(data.G_u + K*data.G_x);
-C_cl = data.C_c - data.D_c*K;
-D_cl = data.D_c*(data.G_u + K*data.G_x);
+A_pi = data.A - data.B*K;
+B_pi = data.B*(data.G_u + K*data.G_x);
 
-% Initialize H_oinf, c_oinf with V^epsilon cst
-H_roinf = [zeros(n_c,n),...
-          data.L*(C_cl*data.G_x + D_cl)];
-c_roinf = (1 - data.epsilon)*data.a;
+% Initialize
+k = 0;
+L_k = [zeros(dimz,n), data.W*data.G_x;
+       zeros(dimb,n), data.M*data.G_u;
+       data.W, zeros(dimz,m);
+       -data.M*K, data.M*(data.G_u + K*data.G_x)];
+a_k = [(1-data.epsilon)*data.z;
+       (1-data.epsilon)*data.b;
+       data.z;
+       data.b];
+H = L_k;
+c = a_k;
+phi = rmoas_phi(H,data);
 
-% 0-step O_0 set
-L_0 = data.L*[C_cl, D_cl];
-a_0 = data.a;
-[L_0,a_0] = moas_elim_redundancies(H_roinf,c_roinf,L_0,a_0);
-H_roinf = [H_roinf;L_0];
-c_roinf = [c_roinf;a_0];
-
-% Find L_1, a_1 and iterate by adding rows to H_oinf, c_oinf until h_1 is empty
-while ~isempty(a_0)
-    % Compute the next step constraints
-    L_1 = L_0*[A_cl, B_cl; zeros(l,n), eye(l)];
-    a_1 = a_0 - rmoas_dastar(L_0,data);
-    [L_1,a_1] = moas_elim_redundancies(H_roinf,c_roinf,L_1,a_1);
-    H_roinf = [H_roinf;L_1];
-    c_roinf = [c_roinf;a_1];
-    L_0 = L_1;
-    a_0 = a_1;
+while true
+  if k == 0
+    L_kk = L_k*[A_pi, B_pi;
+                zeros(m,n), eye(m)];
+    a_kk = a_k - phi;
+  else
+    L_kk = L_plus*[A_pi, B_pi;
+                zeros(m,n), eye(m)];
+    phi_kk = rmoas_phi(L_plus,data);
+    phi = [phi; phi_kk];
+    a_kk = a_plus - phi_kk;
+  end
+  [L_plus,a_plus] = moas_elim_redundancies(H,c,L_kk,a_kk);
+  if ~isempty(a_plus)
+    k = k + 1;
+    H = [H; L_plus];
+    c = [c; a_plus];
+  else
+    break;
+  end
 end
