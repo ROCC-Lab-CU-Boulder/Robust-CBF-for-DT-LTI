@@ -22,7 +22,7 @@ your path:
 addpath(userpath+"\RMOAS-RDCBF")
 ```
 We included two example files `rdcbf_example1.mlx` and `rdcbf_example2.mlx` as MATLAB Live Scripts that will guide you in using the
-package. They solve Examples 1 and 2, respectively of our paper.
+package. They solve Examples 1 and 2, respectively, of our paper.
 
 ## Acknowledgements
 This work was supported by the University of Colorado Boulder.
