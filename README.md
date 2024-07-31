@@ -1,4 +1,4 @@
-# RMOAS-RDCBF: Systematic Design of Robust Discrete-time Control Barrier Functions for Linear Systems
+# Building Robust Control Barrier Functions from Robust Maximal Output Admissible Sets
 This repository contains MATLAB source code for the paper [Building Robust Control Barrier Functions from
 Robust Maximal Output Admissible Sets].
 
