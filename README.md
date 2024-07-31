@@ -1,6 +1,6 @@
 # RMOAS-RDCBF: Systematic Design of Robust Discrete-time Control Barrier Functions for Linear Systems
-This repository contains MATLAB source code for the paper [Robust Constrained Control using
-Discrete-time Control Barrier Functions].
+This repository contains MATLAB source code for the paper [Building Robust Control Barrier Functions from
+Robust Maximal Output Admissible Sets].
 
 
 For more information about our work, please visit [ROCC Team@CU Boulder](https://www.colorado.edu/faculty/nicotra/robotics-optimization-and-constrained-control).
