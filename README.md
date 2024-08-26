@@ -14,7 +14,7 @@ The following MATLAB toolboxes are required:
 The following tools are recommended:
 * [MPT3](https://www.mpt3.org/) for visualizing the RMOAS.
 * [YALMIP](https://yalmip.github.io/) to streamline the QP formulation.
-* [MOSEK](https://www.mosek.com/) as a specialized convex QP solver. Free [academic licenses](https://www.mosek.com/products/academic-licenses/) are available 
+* [MOSEK](https://www.mosek.com/) as a specialized convex QP solver. Free [academic licenses](https://www.mosek.com/products/academic-licenses/) are available.
 
 The package is lightweight and there is no installation beyond adding the folder to
 your path:
