@@ -7,22 +7,22 @@ For more information about our work, please visit [ROCC Team@CU Boulder](https:/
 
 ## MATLAB
 ### Dependencies & Installation
-The MATLAB implementation requires a working installation of [MPT3](https://www.mpt3.org/) and
-we recommend using [YALMIP](https://yalmip.github.io/) to instantiate the quadratic program
-(QP) and [MOSEK](https://www.mosek.com/) to solve it (note that you will need a license, but free academic licenses are available).
+The following MATLAB toolboxes are required:
+* [Optimization Toolbox](https://www.mathworks.com/products/optimization.html)
+* [Control Systems Toolbox](https://www.mathworks.com/products/control.html)
 
-You might also find the following MATHWORKS toolboxes useful/necessary:
-* Optimization Toolbox
-* Symbolic Math Toolbox
-* Control Systems Toolbox
+The following tools are recommended:
+* [MPT3](https://www.mpt3.org/) for visualizing the RMOAS.
+* [YALMIP](https://yalmip.github.io/) to streamline the QP formulation.
+* [MOSEK](https://www.mosek.com/) as a specialized convex QP solver. Free [academic licenses](https://www.mosek.com/products/academic-licenses/) are available 
 
-The package is lightweight and there is no installation beyond adding the following folders to
+The package is lightweight and there is no installation beyond adding the folder to
 your path:
 ```
-addpath(userpath+"\RMOAS-RDCBF")
+addpath(userpath+"\Robust-CBF-for-DT-LTI")
 ```
 We included two example files `rdcbf_example1.mlx` and `rdcbf_example2.mlx` as MATLAB Live Scripts that will guide you in using the
 package. They solve Examples 1 and 2, respectively, of our paper.
 
 ## Acknowledgements
-This work was supported by the University of Colorado Boulder.
+This work was supported by the University of Colorado Boulder and the NSF-CMMI Award #2411667.
