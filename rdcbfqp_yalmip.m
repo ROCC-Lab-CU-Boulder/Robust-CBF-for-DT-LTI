@@ -13,6 +13,13 @@ arguments
   options.soft (1,1) logical = 0
 end
 
+% Check norm weight
+if isfield(data,'P')
+  P = data.P;
+else 
+  P = eye(data.m);
+end
+
 % Setup optimization variables and parameters
 x = sdpvar(size(data.A,1),1);
 u = sdpvar(size(data.B,2),1);
@@ -20,7 +27,7 @@ w = sdpvar(size(data.B,2),1);
 v = sdpvar(size(data.G_x,2),1);
 
 % Objective
-obj = norm(u - data.kappa(x,r))^2 + data.eta*norm(w - r)^2;
+obj = (u - data.kappa(x,r))'*P*(u - data.kappa(x,r)) + data.eta*norm(w-r)^2;
 
 if options.soft
   wt = 1000; % wt on epsilon (sufficiently large)

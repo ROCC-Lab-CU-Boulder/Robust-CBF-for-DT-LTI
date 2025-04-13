@@ -13,7 +13,14 @@ arguments
   r
 end
 
-H = 2*blkdiag(eye(data.m),data.eta*eye(data.m));
-f = @(x) -2*[data.kappa(x,r); data.eta*r];
+% Check norm weight
+if isfield(data,'P')
+  P = data.P;
+else 
+  P = eye(data.m);
+end
+
+H = 2*blkdiag(P,data.eta*eye(data.m));
+f = @(x) -2*[P*data.kappa(x,r); data.eta*r];
 A = [[data.M, zeros(size(data.M,1),data.m)]; data.M_K];
 b = @(x) [data.b; data.b_K(x)];
