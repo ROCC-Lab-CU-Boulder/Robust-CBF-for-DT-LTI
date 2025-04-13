@@ -49,6 +49,6 @@ end
 % Add solvetime wrapper
 function [uw,errorcode,solvetime] = rdcbf_sortout(x,v,prob)
     [uw, errorcode,~,~,~,sol] = prob(x,v);
-    uw = cell2mat(uw)';
+    uw = cell2mat(uw);
     solvetime = sol.solvertime;
 end
