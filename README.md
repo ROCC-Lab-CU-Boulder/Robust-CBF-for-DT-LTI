@@ -1,6 +1,6 @@
 # Building Robust Control Barrier Functions from Robust Maximal Output Admissible Sets
 This repository contains MATLAB source code for the paper [Building Robust Control Barrier Functions from
-Robust Maximal Output Admissible Sets].
+Robust Maximal Output Admissible Sets](https://ieeexplore.ieee.org/document/10886547).
 
 
 For more information about our work, please visit [ROCC Team@CU Boulder](https://www.colorado.edu/faculty/nicotra/robotics-optimization-and-constrained-control).
